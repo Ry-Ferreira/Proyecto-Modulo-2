@@ -1,20 +1,19 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MateifyLogo from '../Images/LogoMateify.png';
 
 
-const NavBar = () => {
+const NavBar = (props) => {
     return (
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
-          <Grid alignContent="center" direction="row">
-            <Typography variant="h6" >
+          <Grid justify={props.justify} container="bool">
             <img src={MateifyLogo} alt="MateifyLogo"/>
-              Mateify
+            <Typography variant="h6">
+                Mateaify
             </Typography>
           </Grid>
         </Toolbar>

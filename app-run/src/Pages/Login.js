@@ -3,8 +3,8 @@ import NavBar from '../Components/NavBar';
 
 const Login = () => {
     return(
-        <NavBar />
+        <NavBar justify="center"/>
     )
 }
 
-export default NavBar;
+export default Login;
