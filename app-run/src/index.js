@@ -1,9 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Probando from './App';
 import './index.css';
 
+// IMPORT PAGES
+
+import Login from './Pages/Login';
+
+
+
 ReactDOM.render(
-  <App />,
+  <Login />,
   document.getElementById('root')
 );
