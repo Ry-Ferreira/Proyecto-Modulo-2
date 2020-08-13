@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Probando from './App';
 import './index.css';
 
 // IMPORT PAGES
 
-import Login from './Pages/Login';
+import App from './App';
 
 
 
 ReactDOM.render(
-  <Login />,
+    <App />,
   document.getElementById('root')
 );
