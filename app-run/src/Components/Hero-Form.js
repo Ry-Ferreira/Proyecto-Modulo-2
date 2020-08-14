@@ -1,4 +1,4 @@
-import React, { Fragment, useState, Component} from 'react';
+import React, { Fragment } from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import padlock from '../Images/candado-logo.png';
 import Divider from '@material-ui/core/Divider';
+
 
 const useStyles = makeStyles({ 
     root: {
@@ -56,7 +57,8 @@ const Form = () => {
                                     />
                                 </Box>
                                 <Box mt={4} width="50%"> 
-                                    <Button 
+                                    <Button
+                                         
                                         fullWidth="bool" 
                                         variant="contained" 
                                         classes={{

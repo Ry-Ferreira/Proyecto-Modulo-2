@@ -12,10 +12,14 @@ const NavBar = (props) => {
         <AppBar position="static">
           <Toolbar>
             <Grid justify={props.justify} container="bool">
-              <img src={MateifyLogo} alt="MateifyLogo"/>
-              <Typography variant="h6">
-                  Mateaify
-              </Typography>
+              <Box mr={1}>
+                <img src={MateifyLogo} alt="MateifyLogo"/>
+              </Box>
+              <Box ml={1}>
+                <Typography variant="h6">
+                    Mateaify
+                </Typography>
+              </Box>
             </Grid>
           </Toolbar>
         </AppBar>
