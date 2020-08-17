@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 const EmptySearch = () => {
 
     let classes = useStyles();
-    let Op = true;
+    let Op = false;
 
     return (
         <Container>

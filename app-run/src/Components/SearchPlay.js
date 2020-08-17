@@ -1,18 +1,11 @@
 import React, { Fragment } from 'react';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Input from '@material-ui/core/Input';
-import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import FilledInput from '@material-ui/core/FilledInput';
-import EmptySearch from './Sub-components/emptySearch';
-import Container from '@material-ui/core/Container';
+import EmptySearch from './Sub-components/EmptySearch';
 
 
 const useStyle = makeStyles((theme) => ({
@@ -22,8 +15,6 @@ const useStyle = makeStyles((theme) => ({
 }))
 
 
-
-
 const SearchPlay = () => {
 
     let classes = useStyle();
@@ -31,7 +22,7 @@ const SearchPlay = () => {
     return (
         <Fragment>
             <Box my={4}>
-                <FormControl fullWidth variant="outlined" classes={classes.margin}> 
+                <FormControl fullWidth variant="outlined"> 
                     <Box width="40%" mx="auto">
                         <OutlinedInput
                             classes={{root:classes.root}}
