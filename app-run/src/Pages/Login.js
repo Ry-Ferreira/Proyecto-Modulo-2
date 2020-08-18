@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import NavBar from '../Components/NavBar';
-import Form from '../Components/Hero-Form';
+import Form from '../Components/Form';
 
 const Login = () => {
     return(
