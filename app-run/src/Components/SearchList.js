@@ -24,15 +24,10 @@ const SearchList = () => {
     
     const classes = useStyles();
     const find = true;
-    const flexContainer = {
-        display: 'flex',
-        flexDirection: 'row',
-        padding: 0,
-    };
 
     return(
         <Container>
-            <Box boxShadow={3} py={4} my={2} mx={3} px={9}>
+            <Box boxShadow={3} py={4} my={2} px={9}>
                 <Grid container="bool" direction="column">
                     <Box mb={2}>
                         <Box mb={1}> 
