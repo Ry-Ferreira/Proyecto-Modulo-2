@@ -96,7 +96,7 @@ const SearchPlay = () => {
                     <Divider variant="middle" classes={{root: classes.divider}} />
                     <Box mx="auto" mb={2} width="100%">
                         {!songResult &&<EmptySearch />}
-                        {songResult && <SearchResult />}
+                        <SearchResult name={filterList.name} artist={filterList.artist} album={filterList.album} duration={filterList.duration} />
                     </Box>
                 </Box>
             </Container>
