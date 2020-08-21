@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles ,Container, Grid, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 
-
 const useStyles = makeStyles({
     root: {
         marginLeft: 0,

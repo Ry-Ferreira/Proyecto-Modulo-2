@@ -5,13 +5,15 @@ import SearchIcon from '@material-ui/icons/Search';
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Divider from '@material-ui/core/Divider';
-import EmptySearch from './Sub-components/EmptySearch';
-import SearchResult from './Sub-components/SearchResult';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import songsJSON from '../base-de-datos/songData.json';
+
 
 const useStyle = makeStyles((theme) => ({
     root: {
@@ -25,49 +27,49 @@ const useStyle = makeStyles((theme) => ({
 
 
 const SearchPlay = () => {
-    
+
     let songs = songsJSON;
     let classes = useStyle();
-    let songResult = true;
 
     const [inputValue, setInputValue] = useState("");
     const [filterList, setFilterList] = useState([]);
 
     const filterSongs = (song) => {
-    
+
         // Aca filtro las canciones que coinciden con la busqueda
         if (song.name.includes(inputValue)) {
-          return true;
+            return true;
         } else {
-          return false;
+            return false;
         }
     };
 
     const handleInputValue = (e) => {
         setInputValue(e.target.value);
+        console.log(inputValue);
     };
 
     const handleInputKeyPress = (e) => {
         if (e.key === "Enter") {
-    
-          // primero me quedo con los resultyados filtrados
-          let result = songs.filter(filterSongs);
-    
-          // despues actualizo el estado con esos resultados pora poder mostrarlos en el render
-          setFilterList(result);
+
+            // primero me quedo con los resultyados filtrados
+            let result = songs.filter(filterSongs);
+
+            // despues actualizo el estado con esos resultados pora poder mostrarlos en el render
+            setFilterList(result);
+            console.log(filterList);
         }
     };
 
 
 
     return (
-        <Fragment>
             <Container>
                 <Box my={4}>
-                    <FormControl fullWidth variant="outlined"> 
+                    <FormControl fullWidth variant="outlined">
                         <Box width="40%" mx="auto">
                             <OutlinedInput
-                                classes={{root:classes.root}}
+                                classes={{ root: classes.root }}
                                 fullWidth="bool"
                                 placeholder="Buscar"
                                 startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
@@ -78,30 +80,31 @@ const SearchPlay = () => {
                         </Box>
                     </FormControl>
                 </Box>
-                <Box boxShadow={3} py={4} px={9}>
-                    <Box mb={2}>
-                        <Box mb={1}> 
-                            <Typography variant="h6" color="primary">Resultados</Typography>
-                        </Box>
-                        <Box>
-                            <Grid container="bool" direction="row" justify="space-between">
-                                <Box ml={6}><Typography variant="subtitle2">Nombre</Typography></Box>
-                                <Box><Typography variant="subtitle2">Artista</Typography></Box>
-                                <Box><Typography variant="subtitle2">Álbum</Typography></Box>
-                                <Box><Typography variant="subtitle2">Duración</Typography></Box>
-                                <Box><Typography variant="subtitle2">Agregar</Typography></Box>
-                            </Grid>
-                        </Box>
-                    </Box>
-                    <Divider variant="middle" classes={{root: classes.divider}} />
-                    <Box mx="auto" mb={2} width="100%">
-                        {!songResult &&<EmptySearch />}
-                        <SearchResult name={filterList.name} artist={filterList.artist} album={filterList.album} duration={filterList.duration} />
-                    </Box>
-                </Box>
+                <TableContainer>
+                    <Table aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell> Nombre gffgytytytty</TableCell>
+                                <TableCell> Artista </TableCell>
+                                <TableCell> Album </TableCell>
+                                <TableCell> Duracion </TableCell>
+                                <TableCell> Agregar </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {filterList.map((song) => (
+                                <TableRow key={song.uuid}>
+                                    <TableCell align="left">{song.name}</TableCell>
+                                    <TableCell align="left">{song.album}</TableCell>
+                                    <TableCell align="left">{song.duration}</TableCell>
+                                    <TableCell align="left">Agregars</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </Container>
-        </Fragment>
-    )
+   )
 }
 
 export default SearchPlay;

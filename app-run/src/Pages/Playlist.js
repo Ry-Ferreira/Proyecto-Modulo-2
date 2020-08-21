@@ -8,9 +8,11 @@ import { BrowserRouter as useParams } from "react-router-dom";
 
 const Playlist = () => {
 
+    
+
     return (
         <Fragment>
-            <SearchPlay />
+            <SearchPlay  />
             <SearchList />
         </Fragment>
     )
