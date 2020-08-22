@@ -5,15 +5,17 @@ import SearchIcon from '@material-ui/icons/Search';
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
+import Avatar from '@material-ui/core/Avatar';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import songsJSON from '../base-de-datos/songData.json';
-
+import AddButton from './Sub-components/AddButton';
 
 const useStyle = makeStyles((theme) => ({
     root: {
@@ -26,83 +28,66 @@ const useStyle = makeStyles((theme) => ({
 }))
 
 
-const SearchPlay = () => {
+const SearchPlay = (props) => {
 
-    let songs = songsJSON;
+    let filterList = props.filterList;
     let classes = useStyle();
-
-    const [inputValue, setInputValue] = useState("");
-    const [filterList, setFilterList] = useState([]);
-
-    const filterSongs = (song) => {
-
-        // Aca filtro las canciones que coinciden con la busqueda
-        if (song.name.includes(inputValue)) {
-            return true;
-        } else {
-            return false;
-        }
-    };
-
-    const handleInputValue = (e) => {
-        setInputValue(e.target.value);
-        console.log(inputValue);
-    };
-
-    const handleInputKeyPress = (e) => {
-        if (e.key === "Enter") {
-
-            // primero me quedo con los resultyados filtrados
-            let result = songs.filter(filterSongs);
-
-            // despues actualizo el estado con esos resultados pora poder mostrarlos en el render
-            setFilterList(result);
-            console.log(filterList);
-        }
-    };
-
-
 
     return (
             <Container>
-                <Box my={4}>
-                    <FormControl fullWidth variant="outlined">
-                        <Box width="40%" mx="auto">
-                            <OutlinedInput
-                                classes={{ root: classes.root }}
-                                fullWidth="bool"
-                                placeholder="Buscar"
-                                startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
-                                labelWidth={0}
-                                onChange={handleInputValue}
-                                onKeyPress={handleInputKeyPress}
-                            />
+                    <Box my={4}>
+                        <FormControl fullWidth variant="outlined">
+                            <Box width="40%" mx="auto">
+                                <OutlinedInput
+                                    classes={{ root: classes.root }}
+                                    fullWidth="bool"
+                                    placeholder="Buscar"
+                                    startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
+                                    labelWidth={0}
+                                    onChange={props.onChange}
+                                    onKeyPress={props.onKeyPress}
+                                />
+                            </Box>
+                        </FormControl>
+                    </Box>
+                    <Box boxShadow={3} px={4}>
+                        <Box my={2} py={2} px={5}>
+                            <Grid container="bool">                        
+                                <TableContainer>
+                                    <Table aria-label="simple table">
+                                        <TableHead>
+                                            <Typography variant="h6" color="primary">Resultados</Typography>
+                                            <TableRow>
+                                                <TableCell><Typography variant="body1"> Nombre </Typography></TableCell>
+                                                <TableCell><Typography variant="body1"> Artista </Typography></TableCell>
+                                                <TableCell><Typography variant="body1"> Album </Typography></TableCell>
+                                                <TableCell><Typography variant="body1"> Duración </Typography></TableCell>
+                                                <TableCell><Typography variant="body1"> Agrega </Typography></TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {filterList.map((song) => (
+                                                <TableRow key={song.uuid}>
+                                                    <TableCell align="left">
+                                                        <Grid container="bool" direction="row" alignItems="center">
+                                                            <Box mr={2}>
+                                                                <Avatar alt={song.artist.name} src={song.artist.coverUrl}/>
+                                                            </Box>
+                                                            {song.name}
+                                                        </Grid>
+                                                    </TableCell>
+                                                    <TableCell align="left">{song.artist.name}</TableCell>
+                                                    <TableCell align="left">{song.album}</TableCell>
+                                                    <TableCell align="left">{song.duration}</TableCell>
+                                                    <TableCell align="left"><AddButton /></TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                            </Grid>
                         </Box>
-                    </FormControl>
-                </Box>
-                <TableContainer>
-                    <Table aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell> Nombre gffgytytytty</TableCell>
-                                <TableCell> Artista </TableCell>
-                                <TableCell> Album </TableCell>
-                                <TableCell> Duracion </TableCell>
-                                <TableCell> Agregar </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {filterList.map((song) => (
-                                <TableRow key={song.uuid}>
-                                    <TableCell align="left">{song.name}</TableCell>
-                                    <TableCell align="left">{song.album}</TableCell>
-                                    <TableCell align="left">{song.duration}</TableCell>
-                                    <TableCell align="left">Agregars</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                    </Box>
             </Container>
    )
 }
