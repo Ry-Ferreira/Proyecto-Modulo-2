@@ -84,7 +84,7 @@ const SearchPlay = (props) => {
                                                     <TableCell align="left">{song.artist.name}</TableCell>
                                                     <TableCell align="left">{song.album}</TableCell>
                                                     <TableCell align="left">{song.duration}</TableCell>
-                                                    <TableCell align="left"><AddButton onClick={(e) => clickButton(e, song)}/></TableCell>
+                                                    <TableCell align="left"><AddButton onClick={(e) => clickButton(song.uuid)}/></TableCell>
                                                 </TableRow>
                                             ))}
                                         </TableBody>
