@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
@@ -28,10 +28,15 @@ const useStyle = makeStyles((theme) => ({
 }))
 
 
+
+
 const SearchPlay = (props) => {
 
     let filterList = props.filterList;
     let classes = useStyle();
+
+    const clickButton = props.clickButton;
+
 
     return (
             <Container>
@@ -79,7 +84,7 @@ const SearchPlay = (props) => {
                                                     <TableCell align="left">{song.artist.name}</TableCell>
                                                     <TableCell align="left">{song.album}</TableCell>
                                                     <TableCell align="left">{song.duration}</TableCell>
-                                                    <TableCell align="left"><AddButton /></TableCell>
+                                                    <TableCell align="left"><AddButton onClick={(e) => clickButton(e, song)}/></TableCell>
                                                 </TableRow>
                                             ))}
                                         </TableBody>

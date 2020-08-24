@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     }
  });
 
-const Form = () => {
+const Form = (props) => {
 
     const classes = useStyles();
 
@@ -64,7 +64,9 @@ const Form = () => {
                                         classes={{
                                             root: classes.root
                                             }} 
-                                        color="secondary">
+                                        color="secondary"
+                                        onClick={props.onClick}
+                                        >
                                         COMENZAR A CREAR PLAYLISTS
                                     </Button>
                                 </Box>

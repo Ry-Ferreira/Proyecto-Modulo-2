@@ -12,6 +12,7 @@ const Playlist = () => {
 
     const [inputValue, setInputValue] = useState("");
     const [filterList, setFilterList] = useState([]);
+    const [addSong, setAddSong] = useState([]);
 
     const filterSongs = (song) => {
 
@@ -40,12 +41,14 @@ const Playlist = () => {
         }
     };
 
-    
+    const handlePassSong = (song) => {
+        setAddSong(song);
+    };
 
     return (
         <Fragment>
-            <SearchPlay onChange={handleInputValue} onKeyPress={handleInputKeyPress} filterList={filterList}/>
-            <SearchList />
+            <SearchPlay onChange={handleInputValue} onKeyPress={handleInputKeyPress} filterList={filterList} clickButton={handlePassSong}/>
+            <SearchList addSong={addSong}/>
         </Fragment>
     )
 }
