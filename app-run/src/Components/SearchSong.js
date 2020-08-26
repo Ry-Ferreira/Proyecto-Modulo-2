@@ -37,7 +37,6 @@ const SearchPlay = (props) => {
 
     const clickButton = props.clickButton;
 
-
     return (
             <Container>
                     <Box my={4}>
@@ -51,6 +50,7 @@ const SearchPlay = (props) => {
                                     labelWidth={0}
                                     onChange={props.onChange}
                                     onKeyPress={props.onKeyPress}
+                                    value={props.inputValue}
                                 />
                             </Box>
                         </FormControl>
@@ -84,7 +84,7 @@ const SearchPlay = (props) => {
                                                     <TableCell align="left">{song.artist.name}</TableCell>
                                                     <TableCell align="left">{song.album}</TableCell>
                                                     <TableCell align="left">{song.duration}</TableCell>
-                                                    <TableCell align="left"><AddButton onClick={(e) => clickButton(song.uuid)}/></TableCell>
+                                                    <TableCell align="left"><AddButton onClick={(e) => clickButton(song.uuid)} /></TableCell>
                                                 </TableRow>
                                             ))}
                                         </TableBody>

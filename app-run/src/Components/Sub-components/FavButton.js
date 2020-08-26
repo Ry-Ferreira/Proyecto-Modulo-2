@@ -6,9 +6,10 @@ import Box from '@material-ui/core/Box';
 import { Icon } from '@material-ui/core';
 
 const FavButton = (props) => {
+
     return (
         <Box>
-            <IconButton onClick={props.onClickUp}>
+            <IconButton onClick={props.onClickUp} name={props.song.uuid}>
                 <Box>
                     <ThumbUpAltIcon />
                 </Box>

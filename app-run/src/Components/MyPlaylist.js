@@ -14,7 +14,9 @@ import ListResult from './Sub-components/ListResult';
 import EmptyList from './Sub-components/EmptyList';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-
+import IconButton from '@material-ui/core/IconButton';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import FavButton from './Sub-components/FavButton';
 
 const useStyles = makeStyles({
@@ -29,7 +31,7 @@ const useStyles = makeStyles({
 
 
 const MyPlaylist = (props) => {
-    
+
     const classes = useStyles();
 
     const [count, setCountUp] = useState();
@@ -48,7 +50,7 @@ const MyPlaylist = (props) => {
 
 
 
-    return(
+    return (
         <Container>
             <Box boxShadow={3} py={4} my={2} px={9}>
                 <Grid container="bool" direction="column">
@@ -66,13 +68,13 @@ const MyPlaylist = (props) => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                            <Divider variant="middle" classes={{root: classes.root}} />
+                                <Divider variant="middle" classes={{ root: classes.root }} />
                                 {props.myPlaylist.map((song) => (
                                     <TableRow key={song.uuid}>
                                         <TableCell align="left">
                                             <Grid container="bool" direction="row" alignItems="center">
                                                 <Box mr={2}>
-                                                    <Avatar alt={song.name} src={song.artist.coverUrl}/>
+                                                    <Avatar alt={song.name} src={song.artist.coverUrl} />
                                                 </Box>
                                                 {song.name}
                                             </Grid>
@@ -81,7 +83,19 @@ const MyPlaylist = (props) => {
                                         <TableCell align="left">{song.album}</TableCell>
                                         <TableCell align="left">{song.duration}</TableCell>
                                         <TableCell align="left">{song.count}</TableCell>
-                                        <TableCell align="left"><FavButton onClickUp={props.handleUpCount(song)} onClickDown={props.handleDownCount} /></TableCell>
+                                        <TableCell align="left">
+                                            <Box>
+                                                <IconButton onClick={(event) => props.handleUpCount(event, song.uuid)}>
+                                                    <ThumbUpAltIcon />
+                                                </IconButton>
+                                                <IconButton onClick={(event) => props.handleDownCount(event, song.uuid)}>
+                                                    <Box>
+                                                        <ThumbDownIcon />
+                                                    </Box>
+                                                </IconButton>
+                                            </Box>
+                                            {/* <FavButton song={song} onClickUp={props.handleUpCount} onClickDown={props.handleDownCount} />*/}
+                                        </TableCell>
                                     </TableRow>
                                 ))
                                 }
