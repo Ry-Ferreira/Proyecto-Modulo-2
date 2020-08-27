@@ -16,6 +16,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import AddButton from './Sub-components/AddButton';
+import EmptySearch from './Sub-components/EmptySearch';
+import { Hidden } from '@material-ui/core';
 
 const useStyle = makeStyles((theme) => ({
     root: {
@@ -30,7 +32,7 @@ const useStyle = makeStyles((theme) => ({
 
 
 
-const SearchPlay = (props) => {
+const SearchSong = (props) => {
 
     let filterList = props.filterList;
     let classes = useStyle();
@@ -38,63 +40,80 @@ const SearchPlay = (props) => {
     const clickButton = props.clickButton;
 
     return (
-            <Container>
-                    <Box my={4}>
-                        <FormControl fullWidth variant="outlined">
-                            <Box width="40%" mx="auto">
-                                <OutlinedInput
-                                    classes={{ root: classes.root }}
-                                    fullWidth="bool"
-                                    placeholder="Buscar"
-                                    startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
-                                    labelWidth={0}
-                                    onChange={props.onChange}
-                                    onKeyPress={props.onKeyPress}
-                                    value={props.inputValue}
-                                />
-                            </Box>
-                        </FormControl>
+        <Container>
+            <Box my={4}>
+                <FormControl fullWidth variant="outlined">
+                    <Box width="40%" mx="auto">
+                        <OutlinedInput
+                            classes={{ root: classes.root }}
+                            fullWidth="bool"
+                            placeholder="Buscar"
+                            startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
+                            labelWidth={0}
+                            onChange={props.onChange}
+                            onKeyPress={props.onKeyPress}
+                            value={props.inputValue}
+                        />
                     </Box>
-                    <Box boxShadow={3} px={4}>
-                        <Box my={2} py={2} px={5}>
-                            <Grid container="bool">                        
-                                <TableContainer>
-                                    <Table aria-label="simple table">
-                                        <TableHead>
-                                            <Typography variant="h6" color="primary">Resultados</Typography>
-                                            <TableRow>
-                                                <TableCell><Typography variant="body1"> Nombre </Typography></TableCell>
-                                                <TableCell><Typography variant="body1"> Artista </Typography></TableCell>
-                                                <TableCell><Typography variant="body1"> Album </Typography></TableCell>
-                                                <TableCell><Typography variant="body1"> Duración </Typography></TableCell>
-                                                <TableCell><Typography variant="body1"> Agrega </Typography></TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {filterList.map((song) => (
-                                                <TableRow key={song.uuid}>
-                                                    <TableCell align="left">
-                                                        <Grid container="bool" direction="row" alignItems="center">
-                                                            <Box mr={2}>
-                                                                <Avatar alt={song.artist.name} src={song.artist.coverUrl}/>
-                                                            </Box>
-                                                            {song.name}
-                                                        </Grid>
-                                                    </TableCell>
-                                                    <TableCell align="left">{song.artist.name}</TableCell>
-                                                    <TableCell align="left">{song.album}</TableCell>
-                                                    <TableCell align="left">{song.duration}</TableCell>
-                                                    <TableCell align="left"><AddButton onClick={(e) => clickButton(song.uuid)} /></TableCell>
-                                                </TableRow>
-                                            ))}
-                                        </TableBody>
-                                    </Table>
-                                </TableContainer>
-                            </Grid>
-                        </Box>
-                    </Box>
-            </Container>
-   )
+                </FormControl>
+            </Box>
+            <Box boxShadow={3} px={4}>
+                <Box my={2} py={2} px={5}>
+                    <Grid container="bool">
+                        <TableContainer>
+                            <Table aria-label="simple table">
+                                <TableHead>
+                                    <Typography variant="h6" color="primary">Resultados</Typography>
+                                    <TableRow>
+                                        <TableCell><Typography variant="body1"> Nombre </Typography></TableCell>
+                                        <TableCell><Typography variant="body1"> Artista </Typography></TableCell>
+                                        <Hidden xsDown>
+                                            <TableCell><Typography variant="body1"> Album </Typography></TableCell>
+                                            <TableCell><Typography variant="body1"> Duración </Typography></TableCell>
+                                        </Hidden>
+                                        <TableCell><Typography variant="body1"> Agrega </Typography></TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {filterList.length < 1 &&
+                                        <TableRow key="empty" align="center">
+                                            <TableCell
+                                                colspan="6"
+                                                style={{
+                                                    "text-align": "center"
+                                                }}>
+                                                <Grid container="bool" direction="column" alignItems="center">
+                                                        <EmptySearch />
+                                                </Grid>
+                                            </TableCell>
+                                        </TableRow>
+                                    }
+                                    {filterList.map((song) => (
+                                        <TableRow key={song.uuid}>
+                                            <TableCell align="left">
+                                                <Grid container="bool" direction="row" alignItems="center">
+                                                    <Box mr={2}>
+                                                        <Avatar alt={song.artist.name} src={song.artist.coverUrl} />
+                                                    </Box>
+                                                    {song.name}
+                                                </Grid>
+                                            </TableCell>
+                                            <TableCell align="left">{song.artist.name}</TableCell>
+                                            <Hidden xsDown>
+                                                <TableCell align="left">{song.album}</TableCell>
+                                                <TableCell align="left">{song.duration}</TableCell>
+                                            </Hidden>
+                                            <TableCell align="left"><AddButton onClick={(e) => clickButton(song.uuid)} /></TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Grid>
+                </Box>
+            </Box>
+        </Container>
+    )
 }
 
-export default SearchPlay;
+export default SearchSong;

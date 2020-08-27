@@ -43,7 +43,8 @@ const Form = (props) => {
                                         fullWidth="bool" 
                                         id="outlined-basic" 
                                         label="Correo electrónico" 
-                                        variant="outlined" 
+                                        variant="outlined"
+                                        onChange={props.handleInputEmail} 
                                     />
                                 </Box>
                                 <Box mt={4} width="50%">
@@ -54,18 +55,18 @@ const Form = (props) => {
                                         type="password"
                                         autoComplete="current-password"
                                         variant="outlined"
+                                        onChange={props.handleInputPassword} 
                                     />
                                 </Box>
                                 <Box mt={4} width="50%"> 
                                     <Button
-                                         
                                         fullWidth="bool" 
                                         variant="contained" 
                                         classes={{
                                             root: classes.root
                                             }} 
                                         color="secondary"
-                                        onClick={props.onClick}
+                                        onClick={props.onclick}
                                         >
                                         COMENZAR A CREAR PLAYLISTS
                                     </Button>

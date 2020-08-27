@@ -17,7 +17,7 @@ import TableBody from '@material-ui/core/TableBody';
 import IconButton from '@material-ui/core/IconButton';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
-import FavButton from './Sub-components/FavButton';
+import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles({
     root: {
@@ -34,20 +34,6 @@ const MyPlaylist = (props) => {
 
     const classes = useStyles();
 
-    const [count, setCountUp] = useState();
-
-    const songItem = props.myPlaylist;
-
-    const handleUpCount = () => {
-        setCountUp([...songItem]);
-    }
-
-    const handleDownCount = () => {
-        console.log("estoy bajando" + songItem);
-    }
-
-
-
 
 
     return (
@@ -61,14 +47,31 @@ const MyPlaylist = (props) => {
                                 <TableRow>
                                     <TableCell><Typography variant="body1"> Nombre </Typography></TableCell>
                                     <TableCell><Typography variant="body1"> Artista </Typography></TableCell>
-                                    <TableCell><Typography variant="body1"> Album </Typography></TableCell>
-                                    <TableCell><Typography variant="body1"> Duración </Typography></TableCell>
-                                    <TableCell><Typography variant="body1"> Cant. Votos </Typography></TableCell>
+                                    <Hidden xsDown>
+                                        <TableCell><Typography variant="body1"> Album </Typography></TableCell>
+                                        <TableCell><Typography variant="body1"> Duración </Typography></TableCell>
+                                        <TableCell><Typography variant="body1"> Cant. Votos </Typography></TableCell>
+                                    </Hidden>
                                     <TableCell><Typography variant="body1"> Vota </Typography></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 <Divider variant="middle" classes={{ root: classes.root }} />
+                                {props.existSong && 
+                                    <TableRow key="empty" align='center'>
+                                        <TableCell
+                                            colspan="6"
+                                            style={{
+                                                "text-align": "center"
+                                            }}>
+                                            <Grid container="bool" direction="column" alignItems="center">
+                                                <Box width='75%' alignItems='center'>
+                                                   <EmptyList />
+                                                </Box>
+                                            </Grid>
+                                        </TableCell>
+                                    </TableRow>
+                                }
                                 {props.myPlaylist.map((song) => (
                                     <TableRow key={song.uuid}>
                                         <TableCell align="left">
@@ -80,9 +83,11 @@ const MyPlaylist = (props) => {
                                             </Grid>
                                         </TableCell>
                                         <TableCell align="left">{song.artist.name}</TableCell>
-                                        <TableCell align="left">{song.album}</TableCell>
-                                        <TableCell align="left">{song.duration}</TableCell>
-                                        <TableCell align="left">{song.count}</TableCell>
+                                        <Hidden xsDown>
+                                            <TableCell align="left">{song.album}</TableCell>
+                                            <TableCell align="left">{song.duration}</TableCell>
+                                            <TableCell align="left">{song.count}</TableCell>
+                                        </Hidden>
                                         <TableCell align="left">
                                             <Box>
                                                 <IconButton onClick={(event) => props.handleUpCount(event, song.uuid)}>
@@ -94,7 +99,6 @@ const MyPlaylist = (props) => {
                                                     </Box>
                                                 </IconButton>
                                             </Box>
-                                            {/* <FavButton song={song} onClickUp={props.handleUpCount} onClickDown={props.handleDownCount} />*/}
                                         </TableCell>
                                     </TableRow>
                                 ))

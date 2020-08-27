@@ -11,7 +11,7 @@ const Snackbar = () => {
             <NavBar justify="center" />
             <Container>
                 <Box boxShadow="3" my={15} mx={20} py={2}>
-                    <Grid container="bool"  direction="column"   justify="center">
+                    <Grid container="bool" direction="column" justify="center">
                         <Padlock />
                     </Grid>
                 </Box>
