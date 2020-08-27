@@ -8,11 +8,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import { Avatar } from '@material-ui/core';
 import Hidden from '@material-ui/core/Hidden';
-import { green } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({ 
   root: {
-      backgroundColor: green,
+      backgroundColor: '#009688',
   }
 });
 
@@ -23,7 +22,7 @@ const NavBar = (props) => {
     return (
       <Box boxShadow="3">
         <AppBar position="static">
-          <Toolbar>
+          <Toolbar classes={{root: classes.root}}>
             <Grid justify={props.justify} container="bool">
               <Box mr={1}>
                 <img src={MateifyLogo} alt="MateifyLogo"/>

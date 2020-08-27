@@ -21,6 +21,9 @@ const useStyles = makeStyles({
     },
     accAsk: {
         color: 'grey',
+    },
+    text: {
+        color: '#009688',
     }
  });
 
@@ -72,7 +75,7 @@ const Form = (props) => {
                                     </Button>
                                 </Box>
                                 <Box mt={3} mb={3}>
-                                    <Button color="primary">¿HAZ OLVIDADO LA CONTRASEÑA?</Button>
+                                    <Button classes={{root:classes.text}}>¿HAZ OLVIDADO LA CONTRASEÑA?</Button>
                                 </Box>
                                 <Divider variant="middle" classes={{
                                     root:classes.divider
@@ -83,7 +86,7 @@ const Form = (props) => {
                                     <Link href="#" underline="none" TypographyClasses={{root:classes.accAsk}}>¿NO TIENES CUENTA?</Link>
                                 </Box>
                                 <Box mt={3} width="25%" >
-                                    <Button variant="outlined" fullWidth="bool" color="primary" href="#">REGISTRATE</Button>
+                                    <Button variant="outlined" fullWidth="bool" classes={{root:classes.text}} href="#">REGISTRATE</Button>
                                 </Box>
                             </Grid>
                     </FormControl>

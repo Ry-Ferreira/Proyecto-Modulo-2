@@ -26,6 +26,9 @@ const useStyle = makeStyles((theme) => ({
     divider: {
         marginLeft: 0,
         marginRight: 0,
+    },
+    text: {
+        color: '#009688',
     }
 }))
 
@@ -63,7 +66,7 @@ const SearchSong = (props) => {
                         <TableContainer>
                             <Table aria-label="simple table">
                                 <TableHead>
-                                    <Typography variant="h6" color="primary">Resultados</Typography>
+                                    <Typography variant="h6" classes={{root: classes.text}}>Resultados</Typography>
                                     <TableRow>
                                         <TableCell><Typography variant="body1"> Nombre </Typography></TableCell>
                                         <TableCell><Typography variant="body1"> Artista </Typography></TableCell>
