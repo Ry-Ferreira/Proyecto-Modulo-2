@@ -1,31 +1,40 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { Fragment, useState, useEffect } from 'react';
+import Box from '@material-ui/core/Box';
 
-// COMPONENTS
+// Components
+import UserTable from './Components/UserTable';
+import SongTable from './Components/SongTable';
 
-import Login from './Pages/Login';
-import Playlist from './Pages/Playlist';
-import Snackbar from './Components/Snackbar';
+function App() {
 
-const App = () => {
+  const [users, setUsers] = useState([]);
+  const [songs, setSongs] = useState([]);
+  
+  useEffect(() => {
+    allUsers();
+  }, []);
+  
+  const allUsers = async() => {
+    const database = await fetch("https://ry-mateify-api.herokuapp.com/users");
+    const dbJSON = await database.json();
+    setUsers(dbJSON);
+  };
 
+  const handleToShowSongs = (uuid) => {
+    let likedSongs = users.find(u => u._id === uuid).likedSongs;
+    setSongs(likedSongs);
+  };
 
-
-  return(
-      <Router>
-          <Switch>
-            <Route path="/playlist/:uuidUser">
-              <Playlist />
-            </Route>
-            <Route path="/playlist">
-              <Snackbar />
-            </Route>
-            <Route path="/">
-              <Login />
-            </Route>
-          </Switch>
-      </Router>
-  )
+  return (
+    <Fragment>
+      <Box mx={4} my={4} boxShadow={3} p={2}>
+        <UserTable users={users} onClickDisc={handleToShowSongs}/>
+      </Box>
+      <Box mx={4} mt={5} boxShadow={3} p={2}>
+        <SongTable songs={songs}/>
+      </Box>
+    </Fragment>
+  );
 }
 
 export default App;
